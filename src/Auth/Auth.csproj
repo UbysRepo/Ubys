@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\ServerRoleEnum.cs" />
+    <Compile Include="Helper\RawDataHelper.cs" />
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Network\AuthClient.cs" />
     <Compile Include="Network\AuthQueue.cs" />
     <Compile Include="Network\AuthServer.cs" />
