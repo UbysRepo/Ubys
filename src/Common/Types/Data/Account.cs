@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Common.Enum;
+
 namespace Common.Types.Data
 {
     class Account
@@ -28,7 +30,27 @@ namespace Common.Types.Data
             get;
             private set;
         }
+        public RolePlayerEnum Role
+        {
+            get;
+            private set;
+        }
         public bool IsBanned
+        {
+            get;
+            private set;
+        }
+        public DateTime EndBanned
+        {
+            get;
+            private set;
+        }
+        public DateTime LastConnection
+        {
+            get;
+            private set;
+        }
+        public DateTime SubscriptionDate
         {
             get;
             private set;
