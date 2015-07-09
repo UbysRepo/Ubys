@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enum\RolePlayerEnum.cs" />
     <Compile Include="IO\BigEndian\BigEndianReader.cs" />
     <Compile Include="IO\BigEndian\BigEndianWriter.cs" />
     <Compile Include="IO\BigEndian\Binary64.cs" />
