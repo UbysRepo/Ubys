@@ -1,0 +1,3 @@
+[submodule "dep/sORM"]
+	path = dep/sORM
+	url = git@github.com:DevMDamien/sORM.git
