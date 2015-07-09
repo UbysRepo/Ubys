@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.IO
+namespace Common.IO.BigEndian
 {
     /// <summary>
     /// Nouveau Type (apparaît en 2.27)

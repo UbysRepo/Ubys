@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Core.IO;
 using System.Collections;
 using System;
 using System.Collections.Generic;
@@ -9,13 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using Common.IO.BigEndian;
 
-namespace Entropy.DofusTool.D2I
+namespace Common.IO.I18n
 {
     /// <summary>
     /// Reader des fichiers Lang de dofus 2.0 pour la version 2.29
     /// </summary>
-    public class D2IFile
+    public class I18nFile
     {
         private BigEndianReader m_Stream;
         private Dictionary<int, int> m_Indexes;

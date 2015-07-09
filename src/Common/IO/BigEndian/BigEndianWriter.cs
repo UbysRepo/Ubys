@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Core.IO
+namespace Common.IO.BigEndian
 {
     /// <summary>
     /// IO Pour Dofus 2.29

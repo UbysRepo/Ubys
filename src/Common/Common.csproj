@@ -39,19 +39,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\Requests.cs" />
-    <Compile Include="IO\BigEndianReader.cs" />
-    <Compile Include="IO\BigEndianWriter.cs" />
-    <Compile Include="IO\Binary64.cs" />
-    <Compile Include="IO\Int64.cs" />
+    <Compile Include="IO\BigEndian\BigEndianReader.cs" />
+    <Compile Include="IO\BigEndian\BigEndianWriter.cs" />
+    <Compile Include="IO\BigEndian\Binary64.cs" />
+    <Compile Include="IO\BigEndian\Int64.cs" />
     <Compile Include="Network\Client.cs" />
     <Compile Include="Network\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tools\D2IFile.cs" />
+    <Compile Include="IO\I18n\I18nFile.cs" />
     <Compile Include="Types\Data\Account.cs" />
     <Compile Include="Utils\Configuration.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="IO\GameData\" />
     <Folder Include="Protocol\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

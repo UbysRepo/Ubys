@@ -13,11 +13,9 @@ namespace Auth.Network
     class AuthServer : Server
     {
         #region Contructor 
-        public AuthServer(IPAddress ip,int port):base(ip,port)
-        {
 
-        }
         #endregion
+
         #region Fields
 
         #endregion
@@ -31,11 +29,7 @@ namespace Auth.Network
         #endregion
 
         #region Public methods
-        public AuthClient AcceptConnection()
-        {
-            TcpClient Sock = base.AcceptClients().Result;
-            return new AuthClient(Sock);
-        }
+
         #endregion
 
         #region Private methods

@@ -20,11 +20,10 @@ namespace Common.Network
         #region Properties
         #endregion
 
-        #region Builder
+        #region Buil
         public Server(IPAddress ip, int port)
         {
             this._listener = new TcpListener(ip, port);
-
         }
         #endregion
 
