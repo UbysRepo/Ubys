@@ -39,7 +39,7 @@ namespace Common.Network
         }
         #endregion
 
-        #region Builder
+        #region Constructor
         public Client(TcpClient sock)
         {
             this._socket = sock;
@@ -48,11 +48,13 @@ namespace Common.Network
             var ipEndPoint = (IPEndPoint)sock.Client.RemoteEndPoint;
             this.Ip = ipEndPoint.Address;
             this.Port = ipEndPoint.Port;
+
+            this.Read();
         }
         #endregion
 
         #region Private methods
-        protected async Task<byte[]> Read()
+        protected virtual async Task<byte[]> Read()
         {
             byte[] buffer;
 
@@ -60,7 +62,7 @@ namespace Common.Network
             {
                 try
                 {
-                    await Task.Delay(5); // (Wax) -> anti-Wpe ?
+                    await Task.Delay(5);
 
                     buffer = new byte[this._socket.Available];
                     await this._stream.ReadAsync(buffer, 0, buffer.Length);

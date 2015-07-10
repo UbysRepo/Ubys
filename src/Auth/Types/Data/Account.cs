@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Common.Enum;
 
-namespace Common.Types.Data
+namespace Auth.Types.Data
 {
     class Account
     {
@@ -60,7 +60,6 @@ namespace Common.Types.Data
         #region Builder
         public Account(string username)
         {
-
         }
         #endregion
 
