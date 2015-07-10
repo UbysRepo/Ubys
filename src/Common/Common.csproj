@@ -48,12 +48,12 @@
     <Compile Include="Network\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IO\I18n\I18nFile.cs" />
-    <Compile Include="Utils\Configuration.cs" />
+    <Compile Include="Protocol\ProtocolManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="IO\GameData\" />
-    <Folder Include="Protocol\" />
     <Folder Include="Types\Data\" />
+    <Folder Include="Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
