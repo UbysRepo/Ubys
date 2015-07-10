@@ -12,7 +12,7 @@ namespace Common.Network
     /// <summary>
     /// Objet constituant la base d'un client Tcp.
     /// </summary>
-    public class AbstractClient : IDisposable
+    public abstract class AbstractClient : IDisposable
     {
         #region Fields
         protected TcpClient _socket;
@@ -49,37 +49,30 @@ namespace Common.Network
             this.Ip = ipEndPoint.Address;
             this.Port = ipEndPoint.Port;
 
-            this.Read();
+            this.Receive();
         }
         #endregion
 
         #region Private methods
         /// <summary>
-        /// Fonction virtuelle permettant de récupérer le paquet reçu.
-        /// "Overrider" dans chaque héritage de ce type.
+        /// Fonction permettant
         /// </summary>
-        /// <returns>Retourne le paquet(byte[]) reçu.</returns>
-        protected virtual async Task<byte[]> Read()
+        private async void Receive()
         {
             byte[] buffer;
-
-            while (this.IsConnected)
+            while (true)
             {
                 try
                 {
                     buffer = new byte[this._socket.Available];
                     await this._stream.ReadAsync(buffer, 0, buffer.Length);
-                    
-                    return buffer;
+                    this.HandleDatas(buffer);
                 }
                 catch
                 {
-                    Dispose();
-                    return null;
+                    //todo: logs.
                 }
             }
-            Dispose();
-            return null;
         }
         #endregion
 
@@ -92,6 +85,10 @@ namespace Common.Network
             this.Ip = null;
             this.Port = 0;
         }
+        #endregion
+
+        #region Protected methods
+        protected abstract void HandleDatas(byte[] buffer);
         #endregion
     }
 }

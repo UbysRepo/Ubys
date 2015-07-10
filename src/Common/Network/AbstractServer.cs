@@ -12,7 +12,7 @@ using System.IO;
 namespace Common.Network
 {
     /// <summary>
-    /// Class modélisant un serveur Tcp de base.
+    /// Type modélisant un serveur Tcp de base.
     /// </summary>
     public abstract class AbstractServer
     {
