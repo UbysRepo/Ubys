@@ -4,17 +4,16 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-
-//External using.
-using Common.Network;
 using System.Threading;
+
+using Common.Network;
 
 namespace Auth.Network
 {
-    class AuthClient : Client
+    class AuthClient : AbstractClient
     {
         #region Fields
-        
+
         #endregion
 
         #region Properties
@@ -22,19 +21,11 @@ namespace Auth.Network
         #endregion
 
         #region Constructor
-        public AuthClient(TcpClient sock)
-            : base(sock)
-        {
 
-        }
         #endregion
 
         #region Private methods
-        private void Read()
-        {
-            byte[] buffer = base.Read().Result;
 
-        }
         #endregion
 
         #region Public methods

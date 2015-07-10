@@ -10,9 +10,9 @@ using System.IO;
 namespace Common.Network
 {
     /// <summary>
-    /// Object used like base for (Tcp)Client.
+    /// Objet constituant la base d'un client Tcp.
     /// </summary>
-    public class Client : IDisposable
+    public class AbstractClient : IDisposable
     {
         #region Fields
         protected TcpClient _socket;
@@ -40,7 +40,7 @@ namespace Common.Network
         #endregion
 
         #region Constructor
-        public Client(TcpClient sock)
+        public AbstractClient(TcpClient sock)
         {
             this._socket = sock;
             this._stream = new NetworkStream(this._socket.Client);
@@ -54,6 +54,11 @@ namespace Common.Network
         #endregion
 
         #region Private methods
+        /// <summary>
+        /// Fonction virtuelle permettant de récupérer le paquet reçu.
+        /// "Overrider" dans chaque héritage de ce type.
+        /// </summary>
+        /// <returns>Retourne le paquet(byte[]) reçu.</returns>
         protected virtual async Task<byte[]> Read()
         {
             byte[] buffer;
@@ -62,8 +67,6 @@ namespace Common.Network
             {
                 try
                 {
-                    await Task.Delay(5);
-
                     buffer = new byte[this._socket.Available];
                     await this._stream.ReadAsync(buffer, 0, buffer.Length);
                     

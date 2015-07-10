@@ -3,19 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-//External using
-using Common.Network;
 using System.Net.Sockets;
 using System.Net;
+//External using
+using Common.Network;
+
 namespace Auth.Network
 {
-    class AuthServer : Server
+    class AuthServer : AbstractServer
     {
-        #region Contructor 
-
-        #endregion
-
         #region Fields
 
         #endregion
@@ -24,15 +20,18 @@ namespace Auth.Network
 
         #endregion
 
-        #region Builder
+        #region Constructor
 
         #endregion
 
         #region Public methods
-
         #endregion
 
         #region Private methods
+        protected override void EndAcceptClient(TcpClient sock)
+        {
+            new AuthClient(sock);
+        }
         #endregion
     }
 }

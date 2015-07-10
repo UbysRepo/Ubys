@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 namespace Common.Utils
 {
     /// <summary>
-    /// Cette classe permet de récupérer un objet de façon à ce que celui-ci ne soit déclaré qu'une seule fois tout au long du programme
+    /// Cette classe permet de récupérer un objet
+    /// de façon à ce que celui-ci ne soit déclaré
+    /// qu'une seule fois tout au long du programme
     /// </summary>
     public sealed class Singleton<T> where T : class, new()
     {

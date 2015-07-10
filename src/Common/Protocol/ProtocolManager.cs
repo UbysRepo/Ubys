@@ -29,7 +29,7 @@ namespace Common.Protocol
         #endregion
 
         #region Public methods
-        public void Parse(Client client, byte[] buffer)
+        public void Parse(AbstractClient client, byte[] buffer)
         {
 
         }
