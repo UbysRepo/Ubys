@@ -9,6 +9,6 @@ namespace Auth.Utils
     class Configuration
     {
         public const string IPAddress = "127.0.0.1";
-        public const int Port = 666;
+        public const int Port = 667;
     }
 }

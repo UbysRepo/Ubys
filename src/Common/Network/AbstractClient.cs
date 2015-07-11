@@ -15,73 +15,97 @@ namespace Common.Network
     /// </summary>
     public abstract class AbstractClient : IDisposable
     {
-        #region Fields
         protected Socket _socket;
-        private byte[] buffer;
-        #endregion 
+        private byte[] _buffer;
+        private bool _disconnected;
 
-        #region Properties
-        public IPAddress Ip
+        public event Action<AbstractClient> Disconnected;
+
+        public bool Connected
         {
-            get;
-            private set;
+            get { return _socket != null && _socket.Connected; }
         }
-        public int Port
+
+        public AbstractClient(Socket socket)
         {
-            get;
-            private set;
-        }
-        #endregion
+            _socket = socket;
+            _buffer = new byte[512];
 
-        #region Constructor
-        public AbstractClient(Socket listener, Socket sock)
+            StartReceive();
+        }
+
+        public void Disconnect()
         {
-            this._socket = sock;
+            if (_disconnected)
+            {
+                return;
+            }
+            _disconnected = true;
 
-            var ipEndPoint = (IPEndPoint)sock.RemoteEndPoint;
-            this.Ip = ipEndPoint.Address;
-            this.Port = ipEndPoint.Port;
+            _socket.Close();
 
-            this.StartReceive();
+            OnDisconnected();
+
+            var disconnected = Disconnected;
+            if (disconnected != null)
+            {
+                disconnected(this);
+            }
         }
-        #endregion
 
-        #region Private methods
-        /// <summary>
-        /// (asynchrone.)
-        /// Méthode permettant de récupérer les données reçues.
-        /// </summary>
+        protected abstract void OnReceived(/*message*/);
+        protected abstract void OnDisconnected();
+
         private void StartReceive()
         {
+            if (!Connected)
+            {
+                return;
+            }
+
             try
             {
-                this.buffer = new byte[this._socket.Available];
-                this._socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(EndReceive), null);
+                _socket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, OnReceive, null);
             }
-            catch
-            {
-                //todo: logs.
+            catch (Exception)
+            {//TODO log exception
             }
         }
-        #endregion
 
-        #region Protected methods
-        /// <summary>
-        /// Méthode abstract permettant d'être overrider
-        /// pour le traitement des données reçues.
-        /// </summary>
-        protected abstract void EndReceive(IAsyncResult ar);
-        #endregion
+        private void OnReceive(IAsyncResult ar)
+        {
+            if (!Connected)
+            {
+                Disconnect();
+                return;
+            }
 
-        #region Public methods
+            var length = 0;
+
+            try
+            {
+                length = _socket.EndReceive(ar);
+            }
+            catch (Exception)
+            {//TODO log exception
+            }
+
+            if (length == 0)
+            {
+                Disconnect();
+                return;
+            }
+
+            //parse packet
+
+            OnReceived();
+
+            StartReceive();
+        }
+
         public virtual void Dispose()
         {
-            this._socket.Disconnect(false);
-            this._socket.Dispose();
-
-            this.Ip = null;
-            this.Port = 0;
+            _socket.Close();
         }
-        #endregion
     }
 }

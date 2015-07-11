@@ -11,34 +11,32 @@ namespace Common.Utils
     /// de façon à ce que celui-ci ne soit déclaré
     /// qu'une seule fois tout au long du programme
     /// </summary>
-    public sealed class Singleton<T> where T : class, new()
+    public abstract class Singleton<T> where T : class, new()
     {
         #region Fields
         private static T _instance = null;
         private static readonly object _lock = new object();    
         #endregion
 
-        #region Contructor
-        private Singleton() { }
-        #endregion
-
-
-        #region Public methods
+        #region Properties
         /// <summary>
         /// Permet d'obtenir l'instance d'une classe
         /// </summary>
         /// <returns>L'objet si déjà crée, null si non</returns>
-        public static T GetInstance()
+        public static T Instance
         {
-            if (_instance == null)
+            get
             {
-                lock (_lock)
+                if (_instance == null)
                 {
-                    if (_instance == null)
-                        _instance = new T();
+                    lock (_lock)
+                    {
+                        if (_instance == null)
+                            _instance = new T();
+                    }
                 }
+                return _instance;
             }
-            return _instance;
         }
         #endregion
         

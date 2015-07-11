@@ -10,7 +10,21 @@ using Common.Network;
 
 namespace Auth.Network
 {
-    class AuthClient
+    public class AuthClient : AbstractClient
     {
+        public AuthClient(Socket socket)
+            : base(socket)
+        {
+        }
+
+        protected override void OnReceived()
+        {
+            Console.WriteLine("Received");
+        }
+
+        protected override void OnDisconnected()
+        {
+            Console.WriteLine("Disconnected");
+        }
     }
 }

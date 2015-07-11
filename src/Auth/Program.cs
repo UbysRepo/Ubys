@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Auth.Network;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,25 +11,18 @@ namespace Auth
     {
         static void Main(string[] args)
         {
-            #region Fields
+            Console.WriteLine("Press ctrl-c to stop");
+            Console.CancelKeyPress += OnCancelKeyPressed;
+            AuthServer.Instance.Initialize();
 
-            #endregion
+            Console.ReadLine();
+        }
 
-            #region Properties
-
-            #endregion
-
-            #region Constructor
-
-            #endregion
-
-            #region Public methods
-
-            #endregion
-
-            #region Private methods
-
-            #endregion
+        static void OnCancelKeyPressed(object sender, ConsoleCancelEventArgs e)
+        {
+            AuthServer.Instance.Stop();
+            AuthServer.Instance.Dispose();
+            Console.WriteLine("Server stopped");
         }
     }
 }
