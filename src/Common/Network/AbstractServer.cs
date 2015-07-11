@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
+using System.Threading;
 
 //Exteral using.
 
@@ -19,6 +20,7 @@ namespace Common.Network
         #region Fields
         protected TcpListener _listener; // Serveur d'écoute
         protected List<AbstractClient> _clients; //Liste des clients du serveur
+        private Thread _acceptThread;
         #endregion
 
         #region Properties
@@ -27,19 +29,19 @@ namespace Common.Network
 
         #region Private methods
         /// <summary>
-        /// Méthoe permettant d'accepter le client 
+        /// Méthode permettant d'accepter le client 
         /// désireux de se connecter au serveur.
         /// </summary>
-        private async void BeginAcceptClient()
+        private void BeginAcceptClient()
         {
-            TcpClient client;
+            Socket sock;
 
             while (true)
             {
                 try
                 {
-                    client = await this._listener.AcceptTcpClientAsync();
-                    this.EndAcceptClient(client);
+                    sock = this._listener.AcceptSocket();
+                    this.EndAcceptClient(sock);
                 }
                 catch
                 {
@@ -52,18 +54,23 @@ namespace Common.Network
         #region Protected methods
         protected void Start()
         {
-
             try
             {
                 this._listener.Start();
-                this.BeginAcceptClient();
+
+                this._acceptThread = new Thread(new ThreadStart(BeginAcceptClient));
+                this._acceptThread.Start();
             }
             catch (Exception e)
             {
                 //todo : logs
             }
         }
-        protected abstract void EndAcceptClient(TcpClient sock);
+        /// <summary>
+        /// Permet de déterminer le type du client accepté.
+        /// </summary>
+        /// <param name="sock">Client en cours de connexion.</param>
+        protected abstract void EndAcceptClient(Socket sock);
         #endregion
     }
 }

@@ -10,28 +10,7 @@ using Common.Network;
 
 namespace Auth.Network
 {
-    class AuthServer : AbstractServer
+    class AuthServer
     {
-        #region Fields
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Constructor
-
-        #endregion
-
-        #region Public methods
-        #endregion
-
-        #region Private methods
-        protected override void EndAcceptClient(TcpClient sock)
-        {
-            new AuthClient(sock);
-        }
-        #endregion
     }
 }

@@ -10,26 +10,7 @@ using Common.Network;
 
 namespace Auth.Network
 {
-    class AuthClient : AbstractClient
+    class AuthClient
     {
-        #region Fields
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Constructor
-
-        #endregion
-
-        #region Private methods
-
-        #endregion
-
-        #region Public methods
-
-        #endregion
     }
 }

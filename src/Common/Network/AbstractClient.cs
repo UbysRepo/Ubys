@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
+using System.Threading;
 
 namespace Common.Network
 {
@@ -15,9 +16,9 @@ namespace Common.Network
     public abstract class AbstractClient : IDisposable
     {
         #region Fields
-        protected TcpClient _socket;
-        protected NetworkStream _stream;
-        #endregion
+        protected Socket _socket;
+        private byte[] buffer;
+        #endregion 
 
         #region Properties
         public IPAddress Ip
@@ -30,65 +31,57 @@ namespace Common.Network
             get;
             private set;
         }
-        public bool IsConnected
-        {
-            get
-            {
-                return this._socket.Client.Connected;
-            }
-        }
         #endregion
 
         #region Constructor
-        public AbstractClient(TcpClient sock)
+        public AbstractClient(Socket listener, Socket sock)
         {
             this._socket = sock;
-            this._stream = new NetworkStream(this._socket.Client);
 
-            var ipEndPoint = (IPEndPoint)sock.Client.RemoteEndPoint;
+            var ipEndPoint = (IPEndPoint)sock.RemoteEndPoint;
             this.Ip = ipEndPoint.Address;
             this.Port = ipEndPoint.Port;
 
-            this.Receive();
+            this.StartReceive();
         }
         #endregion
 
         #region Private methods
         /// <summary>
-        /// Fonction permettant
+        /// (asynchrone.)
+        /// Méthode permettant de récupérer les données reçues.
         /// </summary>
-        private async void Receive()
+        private void StartReceive()
         {
-            byte[] buffer;
-            while (true)
+            try
             {
-                try
-                {
-                    buffer = new byte[this._socket.Available];
-                    await this._stream.ReadAsync(buffer, 0, buffer.Length);
-                    this.HandleDatas(buffer);
-                }
-                catch
-                {
-                    //todo: logs.
-                }
+                this.buffer = new byte[this._socket.Available];
+                this._socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(EndReceive), null);
+            }
+            catch
+            {
+                //todo: logs.
             }
         }
+        #endregion
+
+        #region Protected methods
+        /// <summary>
+        /// Méthode abstract permettant d'être overrider
+        /// pour le traitement des données reçues.
+        /// </summary>
+        protected abstract void EndReceive(IAsyncResult ar);
         #endregion
 
         #region Public methods
         public virtual void Dispose()
         {
-            this._socket.Close();
-            this._stream.Close();
+            this._socket.Disconnect(false);
+            this._socket.Dispose();
 
             this.Ip = null;
             this.Port = 0;
         }
-        #endregion
-
-        #region Protected methods
-        protected abstract void HandleDatas(byte[] buffer);
         #endregion
     }
 }
