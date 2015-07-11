@@ -15,12 +15,15 @@ namespace Common.Network
     /// </summary>
     public abstract class AbstractClient : IDisposable
     {
-        protected Socket _socket;
+        private Socket _socket;
         private byte[] _buffer;
         private bool _disconnected;
 
-        public event Action<AbstractClient> Disconnected;
+        public static event Action<AbstractClient> Disconnected;
 
+        /// <summary>
+        /// Le client est connecté ??
+        /// </summary>
         public bool Connected
         {
             get { return _socket != null && _socket.Connected; }
@@ -34,6 +37,9 @@ namespace Common.Network
             StartReceive();
         }
 
+        /// <summary>
+        /// Deconnecter le client
+        /// </summary>
         public void Disconnect()
         {
             if (_disconnected)
@@ -56,6 +62,9 @@ namespace Common.Network
         protected abstract void OnReceived(/*message*/);
         protected abstract void OnDisconnected();
 
+        /// <summary>
+        /// Commencer a recevoir des donnée
+        /// </summary>
         private void StartReceive()
         {
             if (!Connected)
@@ -72,6 +81,10 @@ namespace Common.Network
             }
         }
 
+        /// <summary>
+        /// Reception d'un packet
+        /// </summary>
+        /// <param name="ar"></param>
         private void OnReceive(IAsyncResult ar)
         {
             if (!Connected)
@@ -103,6 +116,9 @@ namespace Common.Network
             StartReceive();
         }
 
+        /// <summary>
+        /// Liberer les ressources
+        /// </summary>
         public virtual void Dispose()
         {
             _socket.Close();

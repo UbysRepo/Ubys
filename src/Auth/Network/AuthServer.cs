@@ -16,7 +16,6 @@ namespace Auth.Network
     {
         private NetworkAcceptor _acceptor;
         private List<AuthClient> _clients;
-        private bool _running;
 
         public AuthServer()
         {
@@ -24,6 +23,9 @@ namespace Auth.Network
             _clients = new List<AuthClient>();
         }
 
+        /// <summary>
+        /// Lancement du server
+        /// </summary>
         public void Initialize()
         {
             if (!_acceptor.Bind(Configuration.IPAddress, Configuration.Port))
@@ -36,30 +38,36 @@ namespace Auth.Network
 
             Console.WriteLine("Listening to {0}:{1}", Configuration.IPAddress, Configuration.Port);
 
-            _running = true;
+            AuthClient.Disconnected += OnDisconnected;
             _acceptor.Accepted += OnAccepted;
         }
 
+        /// <summary>
+        /// Arret du server
+        /// </summary>
         public void Stop()
         {
             _acceptor.Stop();
             _acceptor.Accepted -= OnAccepted;
-
-            _running = false;
+            AuthClient.Disconnected -= OnDisconnected;
 
             foreach (var client in _clients)
             {
                 client.Disconnect();
+                client.Dispose();
             }
             _clients.Clear();
         }
 
+        /// <summary>
+        /// Connection d'un client
+        /// </summary>
+        /// <param name="socket"></param>
         private void OnAccepted(Socket socket)
         {
             Console.WriteLine("incoming connection {0}", socket.RemoteEndPoint.ToString());
 
             var client = new AuthClient(socket);
-            client.Disconnected += OnDisconnected;
 
             lock (_clients)
             {
@@ -67,17 +75,17 @@ namespace Auth.Network
             }
         }
 
+        /// <summary>
+        /// Deconnection d'un client
+        /// </summary>
+        /// <param name="client"></param>
         private void OnDisconnected(AbstractClient client)
         {
-            client.Disconnected -= OnDisconnected;
             client.Dispose();
 
-            if (_running)
+            lock (_clients)
             {
-                lock (_clients)
-                {
-                    _clients.Remove(client as AuthClient);
-                }
+                _clients.Remove(client as AuthClient);
             }
         }
 

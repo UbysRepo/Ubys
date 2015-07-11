@@ -11,10 +11,10 @@ namespace Common.Utils
     /// de façon à ce que celui-ci ne soit déclaré
     /// qu'une seule fois tout au long du programme
     /// </summary>
-    public abstract class Singleton<T> where T : class, new()
+    public abstract class Singleton<T>
     {
         #region Fields
-        private static T _instance = null;
+        private static T _instance;
         private static readonly object _lock = new object();    
         #endregion
 
@@ -32,7 +32,7 @@ namespace Common.Utils
                     lock (_lock)
                     {
                         if (_instance == null)
-                            _instance = new T();
+                            _instance = Activator.CreateInstance<T>();
                     }
                 }
                 return _instance;

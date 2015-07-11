@@ -13,13 +13,16 @@ using System.Threading;
 namespace Common.Network
 {
     /// <summary>
-    /// Type modélisant un serveur Tcp de base.
+    /// Classe pour accepter de nouvelles connections
     /// </summary>
     public class NetworkAcceptor : IDisposable
     {
         private readonly Socket _socket;
         private bool _running;
 
+        /// <summary>
+        /// event de connection
+        /// </summary>
         public event Action<Socket> Accepted;
 
         public NetworkAcceptor()
@@ -27,6 +30,12 @@ namespace Common.Network
             _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
 
+        /// <summary>
+        /// Bind le socket
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="port"></param>
+        /// <returns></returns>
         public bool Bind(string address, ushort port)
         {
             IPAddress ip;
@@ -52,6 +61,10 @@ namespace Common.Network
             return true;
         }
 
+        /// <summary>
+        /// Commencer l'ecoute
+        /// </summary>
+        /// <returns></returns>
         public bool Listen()
         {
             try
@@ -68,12 +81,18 @@ namespace Common.Network
             return true;
         }
 
+        /// <summary>
+        /// Stopper l'ecoute
+        /// </summary>
         public void Stop()
         {
             _running = false;
             _socket.Close();
         }
 
+        /// <summary>
+        /// Commencer a accepter de nouveaux sockets
+        /// </summary>
         private void StartAccept()
         {
             if (!_running)
@@ -83,6 +102,10 @@ namespace Common.Network
             _socket.BeginAccept(OnAccept, null);
         }
 
+        /// <summary>
+        /// Un socket va être accepter !
+        /// </summary>
+        /// <param name="ar"></param>
         private void OnAccept(IAsyncResult ar)
         {
             if (!_running)
@@ -112,6 +135,9 @@ namespace Common.Network
             StartAccept();
         }
     
+        /// <summary>
+        /// Liberer les ressources
+        /// </summary>
         public void Dispose()
         {
             _socket.Close();

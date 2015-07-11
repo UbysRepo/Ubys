@@ -1,4 +1,5 @@
 ﻿using Auth.Network;
+using Common.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Auth
             Console.WriteLine("Press ctrl-c to stop");
             Console.CancelKeyPress += OnCancelKeyPressed;
             AuthServer.Instance.Initialize();
+
 
             Console.ReadLine();
         }
