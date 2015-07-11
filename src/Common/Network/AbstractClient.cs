@@ -15,7 +15,7 @@ namespace Common.Network
     /// </summary>
     public abstract class AbstractClient : IDisposable
     {
-        protected Socket _socket;
+        private Socket _socket;
         private byte[] _buffer;
         private bool _disconnected;
 
