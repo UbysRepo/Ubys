@@ -45,6 +45,7 @@
     <Compile Include="IO\BigEndian\Binary64.cs" />
     <Compile Include="IO\BigEndian\Int64.cs" />
     <Compile Include="Network\AbstractClient.cs" />
+    <Compile Include="Network\AbstractServer.cs" />
     <Compile Include="Network\NetworkAcceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IO\I18n\I18nFile.cs" />

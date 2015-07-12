@@ -24,7 +24,6 @@ namespace Auth.Network
 
         protected override void OnDisconnected()
         {
-            Console.WriteLine("Disconnected");
         }
     }
 }

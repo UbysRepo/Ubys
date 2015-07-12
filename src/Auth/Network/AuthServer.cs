@@ -12,15 +12,11 @@ using Auth.Utils;
 
 namespace Auth.Network
 {
-    public class AuthServer : Singleton<AuthServer>, IDisposable
+    public class AuthServer : AbstractServer<AuthServer, AuthClient>
     {
-        private NetworkAcceptor _acceptor;
-        private List<AuthClient> _clients;
-
         public AuthServer()
+            : base()
         {
-            _acceptor = new NetworkAcceptor();
-            _clients = new List<AuthClient>();
         }
 
         /// <summary>
@@ -28,28 +24,17 @@ namespace Auth.Network
         /// </summary>
         public void Initialize()
         {
-            if (!_acceptor.Bind(Configuration.IPAddress, Configuration.Port))
-            {//exit or throw something
-            }
-
-            if (!_acceptor.Listen())
-            {//exit or throw something
-            }
+            base.Initialize(Configuration.IPAddress, Configuration.Port);
 
             Console.WriteLine("Listening to {0}:{1}", Configuration.IPAddress, Configuration.Port);
-
-            AuthClient.Disconnected += OnDisconnected;
-            _acceptor.Accepted += OnAccepted;
         }
 
         /// <summary>
         /// Arret du server
         /// </summary>
-        public void Stop()
+        public override void Stop()
         {
-            _acceptor.Stop();
-            _acceptor.Accepted -= OnAccepted;
-            AuthClient.Disconnected -= OnDisconnected;
+            base.Stop();
 
             foreach (var client in _clients)
             {
@@ -63,35 +48,32 @@ namespace Auth.Network
         /// Connection d'un client
         /// </summary>
         /// <param name="socket"></param>
-        private void OnAccepted(Socket socket)
+        protected override void OnAccepted(Socket socket)
         {
-            Console.WriteLine("incoming connection {0}", socket.RemoteEndPoint.ToString());
+            base.OnAccepted(socket);
 
-            var client = new AuthClient(socket);
-
-            lock (_clients)
-            {
-                _clients.Add(client);
-            }
+            Console.WriteLine("Incoming connection {0}", socket.RemoteEndPoint.ToString());
         }
 
         /// <summary>
         /// Deconnection d'un client
         /// </summary>
         /// <param name="client"></param>
-        private void OnDisconnected(AbstractClient client)
+        protected override void OnDisconnected(AbstractClient client)
         {
-            client.Dispose();
+            base.OnDisconnected(client);
 
-            lock (_clients)
-            {
-                _clients.Remove(client as AuthClient);
-            }
+            Console.WriteLine("Client disconnected");
+
+            client.Dispose();
         }
 
-        public void Dispose()
+        /// <summary>
+        /// Libère les ressources
+        /// </summary>
+        public override void Dispose()
         {
-            _acceptor.Dispose();
+            base.Dispose();
         }
     }
 }
