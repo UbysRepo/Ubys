@@ -11,25 +11,36 @@ namespace Common.Network
 {
     public abstract class AbstractServer<S, T> : Singleton<S>, IDisposable where T : AbstractClient
     {
+        #region Fields
         private NetworkAcceptor _acceptor;
         protected List<T> _clients;
+        #endregion
 
+        #region Properties
+        /// <summary>
+        /// Liste des clients connectés
+        /// WARNING: non safe-thread.
+        /// </summary>
+        public ReadOnlyCollection<T> Clients
+        {
+            get 
+            {
+                return _clients.AsReadOnly(); 
+            }
+        }
+        #endregion
+
+        #region Constructor
         public AbstractServer()
         {
             _acceptor = new NetworkAcceptor();
             _clients = new List<T>();
         }
+        #endregion 
 
+        #region Public methods
         /// <summary>
-        /// liste des clients connectés
-        /// </summary>
-        public ReadOnlyCollection<T> Clients
-        {//WARNING: pas safe thread
-            get { return _clients.AsReadOnly(); }
-        }
-
-        /// <summary>
-        /// Lancement du server
+        /// Initialisation du serveur.
         /// </summary>
         public virtual void Initialize(string address, ushort port)
         {
@@ -44,9 +55,8 @@ namespace Common.Network
             AbstractClient.Disconnected += OnDisconnected;
             _acceptor.Accepted += OnAccepted;
         }
-
         /// <summary>
-        /// Arret du server
+        /// Arrêt du serveur.
         /// </summary>
         public virtual void Stop()
         {
@@ -55,7 +65,16 @@ namespace Common.Network
 
             AbstractClient.Disconnected -= OnDisconnected;
         }
+        /// <summary>
+        /// Libère les ressources
+        /// </summary>
+        public virtual void Dispose()
+        {
+            _acceptor.Dispose();
+        }
+        #endregion
 
+        #region Protected methods
         /// <summary>
         /// Connection d'un client
         /// </summary>
@@ -69,25 +88,17 @@ namespace Common.Network
                 _clients.Add(client as T);
             }
         }
-
         /// <summary>
-        /// Deconnection d'un client
+        /// Déconnexion d'un client.
         /// </summary>
         /// <param name="client"></param>
         protected virtual void OnDisconnected(AbstractClient client)
         {
-            lock(_clients)
+            lock (_clients)
             {
                 _clients.Remove(client as T);
             }
         }
-
-        /// <summary>
-        /// Libère les ressources
-        /// </summary>
-        public virtual void Dispose()
-        {
-            _acceptor.Dispose();
-        }
+        #endregion
     }
 }
