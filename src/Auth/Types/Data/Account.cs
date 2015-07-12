@@ -60,6 +60,7 @@ namespace Auth.Types.Data
         #region Builder
         public Account(string username)
         {
+            this.Username = username;
         }
         #endregion
 

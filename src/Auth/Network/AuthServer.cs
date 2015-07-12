@@ -29,7 +29,7 @@ namespace Auth.Network
         {
             base.Initialize(Configuration.IPAddress, Configuration.Port);
 
-            Console.WriteLine("Listening to {0}:{1}", Configuration.IPAddress, Configuration.Port);
+            Console.WriteLine("Listening to {0}:{1}", Configuration.IPAddress, Configuration.Port); // NLog?
         }
         /// <summary>
         /// Arrêt du serveur.

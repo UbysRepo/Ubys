@@ -18,12 +18,10 @@ namespace Common.IO.BigEndian
         {
             get { return (m_BinaryReader.BaseStream.Length - m_BinaryReader.BaseStream.Position); }
         }
-
         public long Position
         {
             get { return m_BinaryReader.BaseStream.Position; }
         }
-
         public Stream BaseStream
         {
             get { return m_BinaryReader.BaseStream; }
