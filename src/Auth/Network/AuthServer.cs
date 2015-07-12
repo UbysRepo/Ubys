@@ -12,13 +12,16 @@ using Auth.Utils;
 
 namespace Auth.Network
 {
-    public class AuthServer : AbstractServer<AuthServer, AuthClient>
+    public sealed class AuthServer : AbstractServer<AuthServer, AuthClient>
     {
-        public AuthServer()
-            : base()
+
+        #region Constructor
+        public AuthServer() : base()
         {
         }
+        #endregion
 
+        #region Public methods
         /// <summary>
         /// Lancement du server
         /// </summary>
@@ -28,9 +31,8 @@ namespace Auth.Network
 
             Console.WriteLine("Listening to {0}:{1}", Configuration.IPAddress, Configuration.Port);
         }
-
         /// <summary>
-        /// Arret du server
+        /// Arrêt du serveur.
         /// </summary>
         public override void Stop()
         {
@@ -43,20 +45,28 @@ namespace Auth.Network
             }
             _clients.Clear();
         }
-
         /// <summary>
-        /// Connection d'un client
+        /// Libère les ressources utilisées.
         /// </summary>
-        /// <param name="socket"></param>
+        public override void Dispose()
+        {
+            base.Dispose();
+        }
+        #endregion
+
+        #region Private methods
+        /// <summary>
+        /// Acceptation d'un client.
+        /// </summary>
+        /// <param name="socket">Socket du client client tentant de se connecter.</param>
         protected override void OnAccepted(Socket socket)
         {
             base.OnAccepted(socket);
 
             Console.WriteLine("Incoming connection {0}", socket.RemoteEndPoint.ToString());
         }
-
         /// <summary>
-        /// Deconnection d'un client
+        /// Déconnexion d'un client
         /// </summary>
         /// <param name="client"></param>
         protected override void OnDisconnected(AbstractClient client)
@@ -67,13 +77,7 @@ namespace Auth.Network
 
             client.Dispose();
         }
-
-        /// <summary>
-        /// Libère les ressources
-        /// </summary>
-        public override void Dispose()
-        {
-            base.Dispose();
-        }
+        #endregion
+        
     }
 }
