@@ -21,7 +21,8 @@ namespace Common.Network
         private bool _running;
 
         /// <summary>
-        /// event de connection
+        /// Event déclanché
+        /// lors de l'acceptation d'un client.
         /// </summary>
         public event Action<Socket> Accepted;
 
