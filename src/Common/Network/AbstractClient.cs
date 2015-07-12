@@ -15,20 +15,21 @@ namespace Common.Network
     /// </summary>
     public abstract class AbstractClient : IDisposable
     {
+        #region Fields
         private Socket _socket;
         private byte[] _buffer;
         private bool _disconnected;
-
         public static event Action<AbstractClient> Disconnected;
+        #endregion
 
-        /// <summary>
-        /// Le client est connecté ??
-        /// </summary>
+        #region Properties
         public bool Connected
         {
             get { return _socket != null && _socket.Connected; }
         }
+        #endregion
 
+        #region Constructor
         public AbstractClient(Socket socket)
         {
             _socket = socket;
@@ -36,9 +37,11 @@ namespace Common.Network
 
             StartReceive();
         }
+        #endregion
 
+        #region Public methods
         /// <summary>
-        /// Deconnecter le client
+        /// Déconnexion du client.
         /// </summary>
         public void Disconnect()
         {
@@ -58,12 +61,21 @@ namespace Common.Network
                 disconnected(this);
             }
         }
-
-        protected abstract void OnReceived(/*message*/);
-        protected abstract void OnDisconnected();
-
         /// <summary>
-        /// Commencer a recevoir des donnée
+        /// Libère les ressources du client.
+        /// </summary>
+        public virtual void Dispose()
+        {
+            this._socket.Close();
+            this._socket = null;
+
+            this._buffer = null;
+        }
+        #endregion
+
+        #region Private methods
+        /// <summary>
+        /// Début de la réception de donées.
         /// </summary>
         private void StartReceive()
         {
@@ -80,7 +92,6 @@ namespace Common.Network
             {//TODO log exception
             }
         }
-
         /// <summary>
         /// Reception d'un packet
         /// </summary>
@@ -115,13 +126,11 @@ namespace Common.Network
 
             StartReceive();
         }
+        #endregion
 
-        /// <summary>
-        /// Liberer les ressources
-        /// </summary>
-        public virtual void Dispose()
-        {
-            _socket.Close();
-        }
+        #region Protected methods
+        protected abstract void OnReceived(/*message*/);
+        protected abstract void OnDisconnected();
+        #endregion
     }
 }
