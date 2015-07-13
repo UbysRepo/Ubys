@@ -1,21 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth", "Auth\Auth.csproj", "{36DA6449-CEBC-4603-8925-BFDB931C6449}"
 	ProjectSection(ProjectDependencies) = postProject
+		{6011B801-CCEC-4053-95AA-05287520A30D} = {6011B801-CCEC-4053-95AA-05287520A30D}
 		{3EA64838-5CA6-4CF1-A1E2-008DD7D52B74} = {3EA64838-5CA6-4CF1-A1E2-008DD7D52B74}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "World", "World\World.csproj", "{8847F0BE-429F-44CF-B349-11D11D061D1F}"
 	ProjectSection(ProjectDependencies) = postProject
+		{6011B801-CCEC-4053-95AA-05287520A30D} = {6011B801-CCEC-4053-95AA-05287520A30D}
 		{3EA64838-5CA6-4CF1-A1E2-008DD7D52B74} = {3EA64838-5CA6-4CF1-A1E2-008DD7D52B74}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{3EA64838-5CA6-4CF1-A1E2-008DD7D52B74}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6011B801-CCEC-4053-95AA-05287520A30D} = {6011B801-CCEC-4053-95AA-05287520A30D}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sORM", "..\dep\sORM\sORM\sORM.csproj", "{D7EDF0CB-B67A-42FE-A9C2-DBE511778250}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protocol", "Protocol\Protocol.csproj", "{6011B801-CCEC-4053-95AA-05287520A30D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +44,10 @@ Global
 		{D7EDF0CB-B67A-42FE-A9C2-DBE511778250}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7EDF0CB-B67A-42FE-A9C2-DBE511778250}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7EDF0CB-B67A-42FE-A9C2-DBE511778250}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6011B801-CCEC-4053-95AA-05287520A30D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6011B801-CCEC-4053-95AA-05287520A30D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6011B801-CCEC-4053-95AA-05287520A30D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6011B801-CCEC-4053-95AA-05287520A30D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
