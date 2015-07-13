@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 namespace Common.Protocol
 {
     /// <summary>
-    /// Type permettant de vivre 
+    /// Type permettant d'utiliser la méthode adaptée
+    /// au handle d'un paquet reçu.
     /// </summary>
     class ProtocolManager
     {
         #region Fields
-        private Dictionary<uint, MethodInfo> _protocolHandler;
+        private Dictionary<ushort, MethodInfo> _protocolHandler;
         #endregion
 
         #region Properties
@@ -29,7 +30,7 @@ namespace Common.Protocol
         #endregion
 
         #region Public methods
-        public void Parse(AbstractClient client, byte[] buffer)
+        public void Handle(AbstractClient client, byte[] buffer)
         {
 
         }
