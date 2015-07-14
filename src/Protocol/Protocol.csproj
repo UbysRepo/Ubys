@@ -47,8 +47,33 @@
     <Compile Include="IO\BigEndian\Binary64.cs" />
     <Compile Include="IO\BigEndian\Int64.cs" />
     <Compile Include="IO\I18n\I18nFile.cs" />
-    <Compile Include="Messages\NetworkMessage.cs" />
+    <Compile Include="Messages\Connection\CredentialsAcknowledgementMessage.cs" />
+    <Compile Include="Messages\Connection\HelloConnectMessage.cs" />
+    <Compile Include="Messages\Connection\IdentificationAccountForceMessage.cs" />
+    <Compile Include="Messages\Connection\IdentificationFailedBannedMessage.cs" />
+    <Compile Include="Messages\Connection\IdentificationFailedForBadVersionMessage.cs" />
+    <Compile Include="Messages\Connection\IdentificationFailedMessage.cs" />
+    <Compile Include="Messages\Connection\IdentificationMessage.cs" />
+    <Compile Include="Messages\Connection\IdentificationSuccessMessage.cs" />
+    <Compile Include="Messages\Connection\IdentificationSuccessWithLoginTokenMessage.cs" />
+    <Compile Include="Messages\Connection\Register\NicknameAcceptedMessage.cs" />
+    <Compile Include="Messages\Connection\Register\NicknameChoiceRequestMessage.cs" />
+    <Compile Include="Messages\Connection\Register\NicknameRefusedMessage.cs" />
+    <Compile Include="Messages\Connection\Register\NicknameRegistrationMessage.cs" />
+    <Compile Include="Messages\Connection\Search\AcquaintanceSearchErrorMessage.cs" />
+    <Compile Include="Messages\Connection\Search\AcquaintanceSearchMessage.cs" />
+    <Compile Include="Messages\Connection\Search\AcquaintanceServerListMessage.cs" />
+    <Compile Include="Messages\Connection\SelectedServerDataExtendedMessage.cs" />
+    <Compile Include="Messages\Connection\SelectedServerDataMessage.cs" />
+    <Compile Include="Messages\Connection\SelectedServerRefusedMessage.cs" />
+    <Compile Include="Messages\Connection\ServerSelectionMessage.cs" />
+    <Compile Include="Messages\Connection\ServersListMessage.cs" />
+    <Compile Include="Messages\Connection\ServerStatusUpdateMessage.cs" />
+    <Compile Include="Messages\AbstractNetworkMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\Connection\GameServerInformations.cs" />
+    <Compile Include="Types\Version\Version.cs" />
+    <Compile Include="Types\Version\VersionExtended.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="IO\GameData\" />
