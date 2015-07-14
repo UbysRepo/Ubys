@@ -2,6 +2,9 @@
 Thumbs.db
 ehthumbs.db
 
+#visual studio personal files
+*.user
+
 # Folder config file
 Desktop.ini
 
