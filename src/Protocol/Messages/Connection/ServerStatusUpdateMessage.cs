@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 using System;
 using Protocol.IO.BigEndian;
+using Protocol.Types.Connection;
 
 namespace Protocol.Messages.Connection
 {

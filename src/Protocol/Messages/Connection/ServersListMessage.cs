@@ -14,6 +14,7 @@ namespace Protocol.Messages.Connection
     using System.Collections.Generic;
     using System;
     using Protocol.IO.BigEndian;
+    using Protocol.Types.Connection;
     
     
     public class ServersListMessage : AbstractAbstractNetworkMessage
