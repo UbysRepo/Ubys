@@ -15,7 +15,7 @@ namespace Protocol.Messages.Connection
     using Protocol.IO.BigEndian;
     
     
-    public class SelectedServerRefusedMessage : AbstractAbstractNetworkMessage
+    public class SelectedServerRefusedMessage : AbstractNetworkMessage
     {
         
         public const int Id = 41;

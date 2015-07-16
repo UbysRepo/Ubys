@@ -15,7 +15,7 @@ namespace Protocol.Messages.Connection
     using Protocol.IO.BigEndian;
     using Protocol.Messages;
     
-    public class ServerSelectionMessage : AbstractAbstractNetworkMessage
+    public class ServerSelectionMessage : AbstractNetworkMessage
     {
         
         public const int Id = 40;

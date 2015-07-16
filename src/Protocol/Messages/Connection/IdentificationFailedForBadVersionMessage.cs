@@ -18,8 +18,6 @@ namespace Protocol.Messages.Connection
     public class IdentificationFailedForBadVersionMessage : IdentificationFailedMessage
     {
         
-        public const int Id = 21;
-        
         public override int ProtocolId
         {
             get
@@ -28,9 +26,9 @@ namespace Protocol.Messages.Connection
             }
         }
         
-        private Version m_requiredVersion;
-        
-        public virtual Version RequiredVersion
+        private Protocol.Types.Version.Version m_requiredVersion;
+
+        public virtual Protocol.Types.Version.Version RequiredVersion
         {
             get
             {
@@ -41,8 +39,8 @@ namespace Protocol.Messages.Connection
                 m_requiredVersion = value;
             }
         }
-        
-        public void Initiate(Version requiredVersion)
+
+        public void Initiate(Protocol.Types.Version.Version requiredVersion)
         {
             m_requiredVersion = requiredVersion;
         }
@@ -56,7 +54,7 @@ namespace Protocol.Messages.Connection
         public override void Deserialize(BigEndianReader reader)
         {
             base.Deserialize(reader);
-            m_requiredVersion = new Version();
+            m_requiredVersion = new Protocol.Types.Version.Version();
             m_requiredVersion.Deserialize(reader);
         }
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Protocol.Messages
 {
-    public abstract class AbstractAbstractNetworkMessage
+    public abstract class AbstractNetworkMessage
     {
         #region Properties
         public abstract int ProtocolId 

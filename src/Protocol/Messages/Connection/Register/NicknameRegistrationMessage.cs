@@ -15,7 +15,7 @@ namespace Protocol.Messages.Connection.Register
     using Protocol.IO.BigEndian;
     
     
-    public class NicknameRegistrationMessage : AbstractAbstractNetworkMessage
+    public class NicknameRegistrationMessage : AbstractNetworkMessage
     {
         
         public const int Id = 5640;

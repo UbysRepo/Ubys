@@ -13,9 +13,10 @@ namespace Protocol.Types.Version
     using System.Collections.Generic;
     using System;
     using Protocol.IO.BigEndian;
+    using Protocol.Messages;
     
     
-    public class Version : NetworkType
+    public class Version : AbstractNetworkMessage
     {
         
         public const int Id = 11;

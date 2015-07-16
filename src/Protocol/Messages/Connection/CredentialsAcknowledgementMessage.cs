@@ -14,7 +14,7 @@ using System;
 namespace Protocol.Messages.Connection
 {
     
-    public class CredentialsAcknowledgementMessage : AbstractAbstractNetworkMessage
+    public class CredentialsAcknowledgementMessage : AbstractNetworkMessage
     {
         
         public const int Id = 6314;

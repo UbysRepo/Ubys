@@ -13,9 +13,10 @@ namespace Protocol.Types.Connection
     using System.Collections.Generic;
     using System;
     using Protocol.IO.BigEndian;
+    using Protocol.Messages;
     
     
-    public class GameServerInformations : NetworkType
+    public class GameServerInformations : AbstractNetworkMessage
     {
         
         public const int Id = 25;

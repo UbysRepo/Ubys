@@ -15,7 +15,7 @@ namespace Protocol.Messages.Connection
     using Protocol.IO.BigEndian;
     
     
-    public class IdentificationFailedMessage : AbstractAbstractNetworkMessage
+    public class IdentificationFailedMessage : AbstractNetworkMessage
     {
         
         public const int Id = 20;

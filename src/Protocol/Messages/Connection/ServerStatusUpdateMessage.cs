@@ -16,7 +16,7 @@ namespace Protocol.Messages.Connection
     
     
     
-    public class ServerStatusUpdateMessage : AbstractAbstractNetworkMessage
+    public class ServerStatusUpdateMessage : AbstractNetworkMessage
     {
         
         public const int Id = 50;

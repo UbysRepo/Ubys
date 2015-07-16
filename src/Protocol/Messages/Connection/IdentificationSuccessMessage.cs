@@ -15,7 +15,7 @@ namespace Protocol.Messages.Connection
     using Protocol.IO.BigEndian;
     
     
-    public class IdentificationSuccessMessage : AbstractAbstractNetworkMessage
+    public class IdentificationSuccessMessage : AbstractNetworkMessage
     {
         
         public const int Id = 22;

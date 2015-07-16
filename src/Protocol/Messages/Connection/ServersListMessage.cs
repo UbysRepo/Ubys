@@ -17,7 +17,7 @@ namespace Protocol.Messages.Connection
     using Protocol.Types.Connection;
     
     
-    public class ServersListMessage : AbstractAbstractNetworkMessage
+    public class ServersListMessage : AbstractNetworkMessage
     {
         
         public const int Id = 30;

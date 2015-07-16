@@ -15,7 +15,7 @@ namespace Protocol.Messages.Connection
     using Protocol.IO.BigEndian;
     
     
-    public class HelloConnectMessage : AbstractAbstractNetworkMessage
+    public class HelloConnectMessage : AbstractNetworkMessage
     {
         
         public const int Id = 3;

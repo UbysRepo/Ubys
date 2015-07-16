@@ -16,7 +16,7 @@ namespace Protocol.Messages.Connection
     using Protocol.Messages;
     using Protocol.Types.Version;
     
-    public class IdentificationMessage : AbstractAbstractNetworkMessage
+    public class IdentificationMessage : AbstractNetworkMessage
     {
         
         public const int Id = 4;

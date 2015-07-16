@@ -15,7 +15,7 @@ namespace Protocol.Messages.Connection.Search
     using Protocol.IO.BigEndian;
     
     
-    public class AcquaintanceSearchErrorMessage : AbstractAbstractNetworkMessage
+    public class AcquaintanceSearchErrorMessage : AbstractNetworkMessage
     {
         
         public const int Id = 6143;
