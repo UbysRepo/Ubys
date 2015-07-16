@@ -79,14 +79,14 @@ namespace Protocol.Messages.Connection
         
         public override void Serialize(BigEndianWriter writer)
         {
-            writer.WriteVarUhShort(m_serverId);
+            writer.WriteVarUShort(m_serverId);
             writer.WriteByte(m_error);
             writer.WriteByte(m_serverStatus);
         }
         
         public override void Deserialize(BigEndianReader reader)
         {
-            m_serverId = reader.ReadVarUhShort();
+            m_serverId = reader.ReadVarUShort();
             m_error = reader.ReadByte();
             m_serverStatus = reader.ReadByte();
         }

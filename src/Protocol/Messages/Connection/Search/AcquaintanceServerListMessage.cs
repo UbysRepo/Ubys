@@ -64,7 +64,7 @@ namespace Protocol.Messages.Connection.Search
             m_servers = new System.Collections.Generic.List<ushort>();
             for (serversIndex = 0; (serversIndex < serversCount); serversIndex = (serversIndex + 1))
             {
-                m_servers.Add(reader.ReadVarUhShort());
+                m_servers.Add(reader.ReadVarUShort());
             }
         }
     }

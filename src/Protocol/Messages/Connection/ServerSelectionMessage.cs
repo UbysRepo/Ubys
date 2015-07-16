@@ -54,7 +54,7 @@ namespace Protocol.Messages.Connection
         
         public override void Deserialize(BigEndianReader reader)
         {
-            m_serverId = reader.ReadVarUhShort();
+            m_serverId = reader.ReadVarUShort();
         }
     }
 }

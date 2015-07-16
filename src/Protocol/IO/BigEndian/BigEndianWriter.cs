@@ -32,7 +32,7 @@ namespace Protocol.IO.BigEndian
                 m_BinaryWriter.BaseStream.Write(value, 0, value.Length);
             }
         }
-        #endregion
+        
         public byte[] Data
         {
             get
@@ -45,6 +45,8 @@ namespace Protocol.IO.BigEndian
                 return buffer;
             }
         }
+        #endregion
+
         #region Constructeurs
         public BigEndianWriter()
         {

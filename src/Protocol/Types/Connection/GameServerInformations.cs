@@ -135,7 +135,7 @@ namespace Protocol.Types.Connection
         
         public override void Deserialize(BigEndianReader reader)
         {
-            m_ObjectId = reader.ReadVarUhShort();
+            m_ObjectId = reader.ReadVarUShort();
             m_status = reader.ReadByte();
             m_completion = reader.ReadByte();
             m_isSelectable = reader.ReadBoolean();

@@ -178,7 +178,30 @@ namespace Protocol.IO.BigEndian
             }
             throw new Exception("Too much data");
         }
+        public ushort ReadVarUShort()
+        {
+            var resultVar = 0;
 
+            for (int offset = 0; offset < 16; offset += 7)
+            {
+                byte readByte = this.ReadByte();
+                bool hasContinuationFlag = (readByte & 128) == 128;
+                int extractedValue = (readByte & 127);
+                if (offset > 0)
+                    extractedValue = extractedValue << offset;
+
+                resultVar += extractedValue;
+
+                if (hasContinuationFlag == false)
+                {
+                    if (resultVar > 32767)
+                        resultVar -= 65536;
+
+                    return (ushort)resultVar;
+                }
+            }
+            throw new Exception("Too much data");
+        }
         public Int64 _ReadVarLong()
         {
             byte readByte = 0;

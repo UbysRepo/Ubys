@@ -66,7 +66,7 @@ namespace Protocol.Messages.Connection
             m_serverIds = new System.Collections.Generic.List<ushort>();
             for (serverIdsIndex = 0; (serverIdsIndex < serverIdsCount); serverIdsIndex = (serverIdsIndex + 1))
             {
-                m_serverIds.Add(reader.ReadVarUhShort());
+                m_serverIds.Add(reader.ReadVarUShort());
             }
         }
     }

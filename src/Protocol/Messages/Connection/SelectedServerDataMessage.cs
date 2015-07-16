@@ -123,7 +123,7 @@ namespace Protocol.Messages.Connection
         
         public override void Deserialize(BigEndianReader reader)
         {
-            m_serverId = reader.ReadVarUhShort();
+            m_serverId = reader.ReadVarUShort();
             m_address = reader.ReadUTF();
             m_port = reader.ReadUShort();
             m_canCreateNewCharacter = reader.ReadBoolean();
